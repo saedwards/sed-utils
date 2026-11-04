@@ -14,6 +14,8 @@ permissions:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    # Must match the environment set on the npm trusted publisher
+    environment: release
     permissions:
       contents: read
       id-token: write
@@ -26,7 +28,12 @@ jobs:
         with:
           node-version: 24
           registry-url: https://registry.npmjs.org/
-          cache: npm
+          # No dependency cache in release builds (npm recommendation)
+          package-manager-cache: false
+
+      # Trusted publishing needs npm >= 11.5.1; don't rely on the runner's bundled npm
+      - name: Update npm
+        run: npm install -g npm@latest && npm --version
 
       - run: npm ci
 
@@ -36,4 +43,5 @@ jobs:
             || { echo "Tag $GITHUB_REF_NAME doesn't match package.json version"; exit 1; }
 
       # prepack runs typecheck, tests and build
-      - run: npm publish
+      # --loglevel verbose shows the OIDC token exchange if auth fails
+      - run: npm publish --loglevel verbose
