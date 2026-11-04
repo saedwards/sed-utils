@@ -1,0 +1,59 @@
+{
+  "name": "@sedware/utils",
+  "version": "1.0.0",
+  "description": "Small, typed, dependency-free utilities for JavaScript and TypeScript.",
+  "license": "MIT",
+  "author": "Shane Edwards (https://sedware.com)",
+  "keywords": [
+    "utils",
+    "utilities",
+    "typescript",
+    "javascript",
+    "esm",
+    "sedware",
+    "combinations",
+    "combinatorics"
+  ],
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist"
+  ],
+  "sideEffects": false,
+  "engines": {
+    "node": "^20.19.0 || >=22.12.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "test:all": "npm run typecheck && npm test",
+    "typecheck": "tsc",
+    "build": "npm run clean && tsc -p tsconfig.build.json",
+    "prepack": "npm run typecheck && npm test && npm run build",
+    "clean": "node -e \"fs.rmSync('dist', {recursive: true, force: true})\"",
+    "bench": "npm run build && npm --prefix benchmark run bench --"
+  },
+  "devDependencies": {
+    "@types/node": "^24.19.2",
+    "jest": "^30.5.2",
+    "typescript": "^7.0.2"
+  },
+  "jest": {
+    "extensionsToTreatAsEsm": [
+      ".ts"
+    ],
+    "transform": {
+      "\\.ts$": "<rootDir>/jest-strip-types.js"
+    }
+  }
+}

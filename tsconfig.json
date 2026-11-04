@@ -1,0 +1,19 @@
+{
+	"include": ["*.ts", "*/**/*.ts"],
+	"exclude": ["node_modules", "dist"],
+	"compilerOptions": {
+		"target": "es2022",
+		"module": "nodenext",
+		"lib": ["es2022"],
+		"types": ["node"],
+		"strict": true,
+		"noEmit": true,
+
+		// Only syntax Node can strip, so the .ts files run without a build
+		"erasableSyntaxOnly": true,
+		"verbatimModuleSyntax": true,
+		// Import with .ts extensions, rewritten to .js in the build
+		"allowImportingTsExtensions": true,
+		"rewriteRelativeImportExtensions": true
+	}
+}
