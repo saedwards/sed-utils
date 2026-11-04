@@ -4,6 +4,10 @@
   "description": "Small, typed, dependency-free utilities for JavaScript and TypeScript.",
   "license": "MIT",
   "author": "Shane Edwards (https://sedware.com)",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/saedwards/sed-utils"
+  },
   "keywords": [
     "utils",
     "utilities",
