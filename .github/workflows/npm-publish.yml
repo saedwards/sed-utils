@@ -20,11 +20,11 @@ jobs:
       contents: read
       id-token: write
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
 
       # Node 24: tests need node:module stripTypeScriptTypes (22.13+),
       # and trusted publishing needs a recent npm CLI.
-      - uses: actions/setup-node@v7
+      - uses: actions/setup-node@v7.1.0
         with:
           node-version: 24
           registry-url: https://registry.npmjs.org/
